@@ -4,10 +4,23 @@
 
 CS:GO server in docker with 128 tick enabled by default.
 
-### Docker hub image
+Updated for PLT Deployment
+
+### Docker Build Instructions
 
 ```shell
-docker pull gonzih/csgo-server
+apt-get update
+apt-get upgrade
+snap install docker
+git clone https://github.com/mvdhoef/docker-csgo-server.git
+docker build -t csgo
+docker build --no-cache -t csgo . #if you need to update
+
+hostname "PLTCSGO"
+rcon_password "PLTCSGORCON"
+
+docker run -d -p 27015:27015 -p 27015:27015/udp csgo -console -usercon +game_type 1 +game_mode 0 +mapgroup mg_armsrace +map ar_shoots +sv_setsteamaccount 38A7A4984A56F088F9AD62E8B90D08DE -net_port_try 1 -maxplayers_override 32 +sv_password plt
+
 ```
 
 ### Details:
